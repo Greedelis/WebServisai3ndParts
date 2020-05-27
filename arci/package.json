@@ -1,0 +1,19 @@
+{
+  "name": "webhomework",
+  "version": "1.0.0",
+  "description": "My Web Services homework 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.mif.vu.lt/arci4647/webhomework"
+  },
+  "author": "Arnoldas Ciplys",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "express": "4.17.1"
+  }
+}

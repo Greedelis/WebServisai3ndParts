@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+    web:
+        build: .
+        command: python main.py
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/code
+        networks: 
+            - network
+    arnweb:
+        build: ./arci
+        command: npm start
+        ports:
+            - "5001:5000"
+        networks: 
+            - network
+
+networks: 
+    network:
