@@ -264,17 +264,38 @@ def saop():
     resp = """<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
     <par:Body>\n"""
     if "par:getAllParts" in json_data:
-        resp += "<resp:getAllPartsResponse>\n<return>"
-        for part in parts:
-            resp += "<part>\n"   
-            resp += "<id>" + str(part["id"]) + "</id>\n"
-            resp += "<name>" + str(part["name"]) + "</name>\n"
-            resp += "<manufacturer>" + str(part["manufacturer"]) + "</manufacturer>\n"
-            resp += "<type>" + str(part["type"]) + "</type>\n"
-            resp += "<price>" + str(part["price"]) + "</price>\n"
-            resp += "<phone>" + str(part["phone"]) + "</phone>\n"
-            resp += "</part>\n</return>"
-        resp += "</resp:getAllPartsResponse>\n</par:Body>\n</soap:Envelope>"
+        resp += "<resp:getAllPartsResponse>\n"
+        if "id" in json_data:
+            items = list((list((list(items[0][1].items()))[2][1].items()))[0][1].items())
+            part_id = items[1][1]
+
+            part = [part for part in parts if str(part["id"]) == part_id]
+            if len(part) > 0:
+                resp += "<return>"
+                resp += "<part>\n" 
+                resp += "<id>" + str(part[0]["id"]) + "</id>\n"
+                resp += "<name>" + str(part[0]["name"]) + "</name>\n"
+                resp += "<manufacturer>" + str(part[0]["manufacturer"]) + "</manufacturer>\n"
+                resp += "<type>" + str(part[0]["type"]) + "</type>\n"
+                resp += "<price>" + str(part[0]["price"]) + "</price>\n"
+                resp += "<phone>" + str(part[0]["phone"]) + "</phone>\n"
+                resp += "</part>\n</return>"
+                resp += "</resp:getPartResponse>\n</par:Body>\n</soap:Envelope>"
+            else:
+                resp += "<failure>No part with this id</failure>"
+                resp += "</resp:getPartResponse>\n</par:Body>\n</soap:Envelope>"
+        else:
+            for part in parts:
+                resp += "<return>"
+                resp += "<part>\n"   
+                resp += "<id>" + str(part["id"]) + "</id>\n"
+                resp += "<name>" + str(part["name"]) + "</name>\n"
+                resp += "<manufacturer>" + str(part["manufacturer"]) + "</manufacturer>\n"
+                resp += "<type>" + str(part["type"]) + "</type>\n"
+                resp += "<price>" + str(part["price"]) + "</price>\n"
+                resp += "<phone>" + str(part["phone"]) + "</phone>\n"
+                resp += "</part>\n</return>"
+            resp += "</resp:getAllPartsResponse>\n</par:Body>\n</soap:Envelope>"
     elif "par:getPart" in json_data:
         resp += "<resp:getPartResponse>"
         if "id" in json_data:
