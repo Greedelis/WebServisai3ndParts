@@ -5,7 +5,86 @@ App runs on port 5000, to run:
 ``` docker-compose up ```
 App comunicates with another service, that runs on port 5001
 (another service, that i used https://git.mif.vu.lt/arci4647/webhomework)
-## Usage
+
+## Usage SOAP
+
+```URL http://localhost:5000/soap```
+
+**Get all Parts**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:getAllParts xmlns="http://PartService/">
+    </par:getAllParts>
+  </soap:Body>
+</soap:Envelope>
+```
+**Get specific part**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:getPart xmlns="http://PartService/">
+    	<id>1</id>
+    </par:getPart>
+  </soap:Body>
+</soap:Envelope>
+```
+**Get specific Full part**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:getFullPart xmlns="http://PartService/">
+    	<id>1</id>
+    </par:getFullPart>
+  </soap:Body>
+</soap:Envelope>
+```
+**Remove part**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:removePart xmlns="http://PartService/">
+    	<id>1</id>
+    </par:removePart>
+  </soap:Body>
+</soap:Envelope>
+```
+**add part**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:addPart xmlns="http://PartService/">
+		<name>Ryzen 5 3600</name>
+		<manufacturer>AMD</manufacturer>
+		<type>CPU</type>
+		<price>181.00</price>
+		<phone>2</phone>
+    </par:addPart>
+  </soap:Body>
+</soap:Envelope>
+```
+**edit part**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+  <soap:Body>
+    <par:updatePart xmlns="http://PartService/">
+		<name>Ryzen 5 3600</name>
+		<manufacturer>AMD</manufacturer>
+		<type>CPU</type>
+		<price>181.00</price>
+		<phone>2</phone>
+    </par:updatePart>
+  </soap:Body>
+</soap:Envelope>
+```
+
+## Usage REST API
 
 ### GET
 
